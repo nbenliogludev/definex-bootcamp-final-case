@@ -34,4 +34,7 @@ public class FileMetadata extends Auditable {
     @Column(nullable = false)
     private LocalDateTime uploadedAt;
 
+    @Column(name = "deleted", nullable = false)
+    private boolean deleted = false;
+
 }

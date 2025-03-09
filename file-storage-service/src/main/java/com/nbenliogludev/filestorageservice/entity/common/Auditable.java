@@ -24,9 +24,6 @@ public abstract class Auditable {
     @Column(name = "updated_by")
     private Long updatedBy;
 
-    @Column(name = "deleted", nullable = false)
-    private boolean deleted = false;
-
     @PrePersist
     protected void onCreate() {
         createdAt = LocalDateTime.now();

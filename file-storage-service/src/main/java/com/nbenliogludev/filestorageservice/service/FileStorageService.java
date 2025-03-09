@@ -55,7 +55,7 @@ public class FileStorageService {
             fileMetadata.setFileName(fileName);
             fileMetadata.setFilePath(targetLocation.toString());
             fileMetadata.setUploadedAt(LocalDateTime.now());
-//            fileMetadata.setDeleted(false);
+            fileMetadata.setDeleted(false);
 
             fileStorageRepository.save(fileMetadata);
 
@@ -97,7 +97,7 @@ public class FileStorageService {
             Path targetLocation = deletedFilesLocation.resolve(fileName);
             Files.move(filePath, targetLocation, StandardCopyOption.REPLACE_EXISTING);
 
-//            fileMetadata.setDeleted(true);
+            fileMetadata.setDeleted(true);
             fileMetadata.setFilePath(targetLocation.toString());
             fileStorageRepository.save(fileMetadata);
         } catch (IOException ex) {
