@@ -1,0 +1,37 @@
+package com.nbenliogludev.filestorageservice.entity;
+
+import com.nbenliogludev.filestorageservice.entity.common.Auditable;
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+
+import java.time.LocalDateTime;
+import java.util.UUID;
+
+/**
+ * @author nbenliogludev
+ */
+@Entity
+@Getter
+@Setter
+@Table(name = "file_metadata")
+public class FileMetadata extends Auditable {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(updatable = false, nullable = false)
+    private UUID id;
+
+    @Column(nullable = false)
+    private UUID taskId;
+
+    @Column(nullable = false)
+    private String fileName;
+
+    @Column(nullable = false)
+    private String filePath;
+
+    @Column(nullable = false)
+    private LocalDateTime uploadedAt;
+
+}

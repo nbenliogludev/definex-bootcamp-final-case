@@ -1,0 +1,35 @@
+package com.nbenliogludev.filestorageservice.entity.common;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.MappedSuperclass;
+import jakarta.persistence.PrePersist;
+
+import java.time.LocalDateTime;
+
+/**
+ * @author nbenliogludev
+ */
+@MappedSuperclass
+public abstract class Auditable {
+
+    @Column(name = "created_at", nullable = false)
+    private LocalDateTime createdAt;
+
+    @Column(name = "updated_at")
+    private LocalDateTime updatedAt;
+
+    @Column(name = "created_by")
+    private Long createdBy;
+
+    @Column(name = "updated_by")
+    private Long updatedBy;
+
+    @Column(name = "deleted", nullable = false)
+    private boolean deleted = false;
+
+    @PrePersist
+    protected void onCreate() {
+        createdAt = LocalDateTime.now();
+        updatedAt = LocalDateTime.now();
+    }
+}
