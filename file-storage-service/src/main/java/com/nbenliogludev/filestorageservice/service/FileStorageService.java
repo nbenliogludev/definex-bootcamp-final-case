@@ -3,6 +3,7 @@ package com.nbenliogludev.filestorageservice.service;
 import com.nbenliogludev.filestorageservice.entity.FileMetadata;
 import com.nbenliogludev.filestorageservice.exception.FileNotFoundException;
 import com.nbenliogludev.filestorageservice.exception.FileStorageException;
+import com.nbenliogludev.filestorageservice.repository.FileStorageRepository;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
@@ -54,7 +55,7 @@ public class FileStorageService {
             fileMetadata.setFileName(fileName);
             fileMetadata.setFilePath(targetLocation.toString());
             fileMetadata.setUploadedAt(LocalDateTime.now());
-            fileMetadata.setDeleted(false);
+//            fileMetadata.setDeleted(false);
 
             fileStorageRepository.save(fileMetadata);
 
@@ -96,7 +97,7 @@ public class FileStorageService {
             Path targetLocation = deletedFilesLocation.resolve(fileName);
             Files.move(filePath, targetLocation, StandardCopyOption.REPLACE_EXISTING);
 
-            fileMetadata.setDeleted(true);
+//            fileMetadata.setDeleted(true);
             fileMetadata.setFilePath(targetLocation.toString());
             fileStorageRepository.save(fileMetadata);
         } catch (IOException ex) {
