@@ -3,7 +3,9 @@ package com.nbenliogludev.filestorageservice.controller;
 import com.nbenliogludev.filestorageservice.dto.request.FileUploadRequestDTO;
 import com.nbenliogludev.filestorageservice.dto.response.FileUploadResponseDTO;
 import com.nbenliogludev.filestorageservice.dto.response.RestResponse;
+import com.nbenliogludev.filestorageservice.service.FileStorageService;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -19,6 +21,7 @@ import java.io.IOException;
 @RestController
 @RequestMapping("/api/files")
 @Validated
+@RequiredArgsConstructor
 public class FileStorageController {
 
     private final FileStorageService fileStorageService;
