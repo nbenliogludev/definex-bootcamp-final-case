@@ -3,6 +3,7 @@ package com.nbenliogludev.filestorageservice.controller;
 import com.nbenliogludev.filestorageservice.dto.request.FileUploadRequestDTO;
 import com.nbenliogludev.filestorageservice.dto.response.FileUploadResponseDTO;
 import com.nbenliogludev.filestorageservice.dto.response.RestResponse;
+import com.nbenliogludev.filestorageservice.entity.FileMetadata;
 import com.nbenliogludev.filestorageservice.service.FileStorageService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -31,10 +32,10 @@ public class FileStorageController {
     public ResponseEntity<RestResponse<FileUploadResponseDTO>> uploadFile(
             @ModelAttribute @Valid FileUploadRequestDTO request) throws IOException {
 
-        String storedFileName = fileStorageService.storeFile(request.file(), request.taskId());
-        String fileUrl = "/api/files/download/" + storedFileName;
+        FileMetadata storedFileMetadata = fileStorageService.storeFile(request.file(), request.taskId());
+        String fileUrl = "/api/files/download/" + storedFileMetadata.getFileName();
 
-        FileUploadResponseDTO responseDTO = new FileUploadResponseDTO(storedFileName, fileUrl);
+        FileUploadResponseDTO responseDTO = new FileUploadResponseDTO(storedFileMetadata.getId(), storedFileMetadata.getFileName(), fileUrl);
 
         return ResponseEntity.ok(RestResponse.of(responseDTO));
     }

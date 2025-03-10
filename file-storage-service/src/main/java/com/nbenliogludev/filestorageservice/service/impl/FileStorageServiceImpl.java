@@ -5,7 +5,6 @@ import com.nbenliogludev.filestorageservice.exception.FileNotFoundException;
 import com.nbenliogludev.filestorageservice.exception.FileStorageException;
 import com.nbenliogludev.filestorageservice.repository.FileStorageRepository;
 import com.nbenliogludev.filestorageservice.service.FileStorageService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
@@ -16,7 +15,6 @@ import java.net.MalformedURLException;
 import java.nio.file.*;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -25,19 +23,19 @@ import java.util.UUID;
 @Service
 public class FileStorageServiceImpl implements FileStorageService {
 
-    private final FileStorageRepository FileStorageRepository;
+    private final FileStorageRepository fileStorageRepository;
     private final Path fileStorageLocation = Paths.get("uploads").toAbsolutePath().normalize();
     private final Path deletedFilesLocation = Paths.get("uploads/deleted").toAbsolutePath().normalize();
     private static final List<String> ALLOWED_FILE_EXTENSIONS = List.of("pdf", "png", "jpg", "jpeg");
 
-    public FileStorageServiceImpl(FileStorageRepository FileStorageRepository) throws IOException {
-        this.FileStorageRepository = FileStorageRepository;
+    public FileStorageServiceImpl(FileStorageRepository fileStorageRepository) throws IOException {
+        this.fileStorageRepository = fileStorageRepository;
         Files.createDirectories(fileStorageLocation);
         Files.createDirectories(deletedFilesLocation);
     }
 
     @Override
-    public String storeFile(MultipartFile file, UUID taskId) {
+    public FileMetadata storeFile(MultipartFile file, UUID taskId) {
         try {
             if (file.isEmpty()) {
                 throw new FileStorageException("Uploaded file is empty.");
@@ -59,53 +57,55 @@ public class FileStorageServiceImpl implements FileStorageService {
             fileMetadata.setUploadedAt(LocalDateTime.now());
             fileMetadata.setDeleted(false);
 
-            FileStorageRepository.save(fileMetadata);
+            fileStorageRepository.save(fileMetadata);
 
-            return fileName;
+            return fileMetadata;
         } catch (IOException ex) {
             throw new FileStorageException("File upload failed for: " + file.getOriginalFilename(), ex);
         }
     }
 
     @Override
-    public Resource loadFileAsResource(String fileName) {
+    public Resource loadFileAsResourceById(UUID fileId) {
+        FileMetadata metadata = fileStorageRepository.findById(fileId)
+                .orElseThrow(() -> new FileNotFoundException("File not found with ID: " + fileId));
+
+        if (metadata.isDeleted()) {
+            throw new FileNotFoundException("File with ID " + fileId + " is deleted.");
+        }
+
         try {
-            Optional<FileMetadata> metadataOpt = FileStorageRepository.findByFileNameAndDeletedFalse(fileName);
-            if (metadataOpt.isEmpty()) {
-                throw new FileNotFoundException(fileName);
-            }
-
-            Path filePath = Paths.get(metadataOpt.get().getFilePath()).normalize();
+            Path filePath = Paths.get(metadata.getFilePath()).normalize();
             Resource resource = new UrlResource(filePath.toUri());
-
             if (resource.exists() && resource.isReadable()) {
                 return resource;
             } else {
-                throw new FileNotFoundException("Cannot read file: " + fileName);
+                throw new FileNotFoundException("Cannot read file with ID: " + fileId);
             }
         } catch (MalformedURLException ex) {
-            throw new FileStorageException("Malformed file path for: " + fileName, ex);
+            throw new FileStorageException("Malformed file path for ID: " + fileId, ex);
         }
     }
 
     @Override
-    public void deleteFile(String fileName) {
-        try {
-            Optional<FileMetadata> metadataOpt = FileStorageRepository.findByFileNameAndDeletedFalse(fileName);
-            if (metadataOpt.isEmpty()) {
-                throw new FileNotFoundException(fileName);
-            }
+    public void deleteFileById(UUID fileId) {
+        FileMetadata fileMetadata = fileStorageRepository.findById(fileId)
+                .orElseThrow(() -> new FileNotFoundException("File not found with ID: " + fileId));
 
-            FileMetadata fileMetadata = metadataOpt.get();
+        if (fileMetadata.isDeleted()) {
+            return;
+        }
+
+        try {
             Path filePath = Paths.get(fileMetadata.getFilePath());
-            Path targetLocation = deletedFilesLocation.resolve(fileName);
+            Path targetLocation = deletedFilesLocation.resolve(fileMetadata.getFileName());
             Files.move(filePath, targetLocation, StandardCopyOption.REPLACE_EXISTING);
 
             fileMetadata.setDeleted(true);
             fileMetadata.setFilePath(targetLocation.toString());
-            FileStorageRepository.save(fileMetadata);
+            fileStorageRepository.save(fileMetadata);
         } catch (IOException ex) {
-            throw new FileStorageException("Failed to delete file: " + fileName, ex);
+            throw new FileStorageException("Failed to delete file with ID: " + fileId, ex);
         }
     }
 
