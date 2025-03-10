@@ -4,8 +4,8 @@ spring:
 
   datasource:
     url: jdbc:postgresql://localhost:5432/definex.file_storage_service_db
-    username: your_username
-    password: your_password
+    username: postgres
+    password: postgres
     driver-class-name: org.postgresql.Driver
 
   jpa:

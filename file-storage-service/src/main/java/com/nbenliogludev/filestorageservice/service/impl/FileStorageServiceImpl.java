@@ -23,7 +23,6 @@ import java.util.UUID;
  * @author nbenliogludev
  */
 @Service
-@RequiredArgsConstructor
 public class FileStorageServiceImpl implements FileStorageService {
 
     private final FileStorageRepository FileStorageRepository;
@@ -54,7 +53,6 @@ public class FileStorageServiceImpl implements FileStorageService {
             Files.copy(file.getInputStream(), targetLocation, StandardCopyOption.REPLACE_EXISTING);
 
             FileMetadata fileMetadata = new FileMetadata();
-            fileMetadata.setId(UUID.randomUUID());
             fileMetadata.setTaskId(taskId);
             fileMetadata.setFileName(fileName);
             fileMetadata.setFilePath(targetLocation.toString());
