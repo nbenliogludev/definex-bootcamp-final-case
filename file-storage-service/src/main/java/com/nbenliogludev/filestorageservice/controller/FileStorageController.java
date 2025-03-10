@@ -14,6 +14,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.util.UUID;
 
 /**
  * @author nbenliogludev
@@ -39,9 +40,9 @@ public class FileStorageController {
     }
 
 
-    @GetMapping("/v1/download/{fileName}")
-    public ResponseEntity<Resource> downloadFile(@PathVariable String fileName) throws IOException {
-        Resource resource = fileStorageService.loadFileAsResource(fileName);
+    @GetMapping("/v1/download/{fileId}")
+    public ResponseEntity<Resource> downloadFile(@PathVariable UUID fileId) throws IOException {
+        Resource resource = fileStorageService.loadFileAsResourceById(fileId);
 
         return ResponseEntity.ok()
                 .contentType(MediaType.APPLICATION_OCTET_STREAM)
@@ -49,9 +50,9 @@ public class FileStorageController {
                 .body(resource);
     }
 
-    @DeleteMapping("/v1/delete/{fileName}")
-    public ResponseEntity<RestResponse<String>> deleteFile(@PathVariable String fileName) {
-        fileStorageService.deleteFile(fileName);
-        return ResponseEntity.ok(RestResponse.of("File marked as deleted: " + fileName));
+    @DeleteMapping("/v1/delete/{fileId}")
+    public ResponseEntity<RestResponse<String>> deleteFile(@PathVariable UUID fileId) {
+        fileStorageService.deleteFileById(fileId);
+        return ResponseEntity.ok(RestResponse.of("File marked as deleted. ID: " + fileId));
     }
 }
