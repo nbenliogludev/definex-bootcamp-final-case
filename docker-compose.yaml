@@ -1,7 +1,7 @@
 version: '3.8'
 
 services:
-  postgres:
+  file-storage-db:
     image: postgres:15
     container_name: file-storage-db
     restart: always
@@ -12,8 +12,23 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - file_storage_db_data:/var/lib/postgresql/data
+
+  user-auth-db:
+    image: postgres:15
+    container_name: user-auth-db
+    restart: always
+    environment:
+      POSTGRES_DB: definex.user_auth_service_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5433:5432"
+    volumes:
+      - user_auth_db_data:/var/lib/postgresql/data
 
 volumes:
-  postgres_data:
+  file_storage_db_data:
+    driver: local
+  user_auth_db_data:
     driver: local

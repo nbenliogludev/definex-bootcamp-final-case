@@ -13,20 +13,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/v1/auth")
+@RequestMapping("/api/auth")
 @RequiredArgsConstructor
 public class AuthenticationController {
 
     private final AuthenticationService service;
-
-    @PostMapping("/register")
+    @PostMapping("/v1/register")
     public ResponseEntity<RestResponse<AuthenticationResponseDTO>> register(
             @RequestBody UserCreateRequestDTO request
     ) {
         return ResponseEntity.ok(RestResponse.of(service.register(request)));
     }
 
-    @PostMapping("/authenticate")
+    @PostMapping("/v1/authenticate")
     public ResponseEntity<RestResponse<AuthenticationResponseDTO>> authenticate(
             @RequestBody AuthenticationRequestDTO request
     ) {

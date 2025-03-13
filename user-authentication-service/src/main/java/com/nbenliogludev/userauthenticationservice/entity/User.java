@@ -19,6 +19,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 /**
  * @author nbenliogludev
  */
+
+
 @Data
 @Builder
 @NoArgsConstructor

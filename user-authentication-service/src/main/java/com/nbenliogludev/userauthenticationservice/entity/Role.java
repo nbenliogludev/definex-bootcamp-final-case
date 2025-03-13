@@ -18,9 +18,6 @@ import static com.nbenliogludev.userauthenticationservice.entity.Permission.MANA
 import static com.nbenliogludev.userauthenticationservice.entity.Permission.MANAGER_READ;
 import static com.nbenliogludev.userauthenticationservice.entity.Permission.MANAGER_UPDATE;
 
-/**
- * @author nbenliogludev
- */
 @RequiredArgsConstructor
 public enum Role {
 
