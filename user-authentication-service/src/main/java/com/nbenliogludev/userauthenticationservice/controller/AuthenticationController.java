@@ -4,6 +4,7 @@ import com.nbenliogludev.userauthenticationservice.dto.request.AuthenticationReq
 import com.nbenliogludev.userauthenticationservice.dto.request.UserCreateRequestDTO;
 import com.nbenliogludev.userauthenticationservice.dto.response.AuthenticationResponseDTO;
 import com.nbenliogludev.userauthenticationservice.dto.response.RestResponse;
+import com.nbenliogludev.userauthenticationservice.service.AuthenticationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,7 +23,7 @@ public class AuthenticationController {
     public ResponseEntity<RestResponse<AuthenticationResponseDTO>> register(
             @RequestBody UserCreateRequestDTO request
     ) {
-        return ResponseEntity.ok(service.register(request));
+        return ResponseEntity.ok(RestResponse.of(service.register(request)));
     }
 
     @PostMapping("/authenticate")

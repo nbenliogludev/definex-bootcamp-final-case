@@ -6,8 +6,9 @@ import com.nbenliogludev.userauthenticationservice.entity.Role;
 import com.nbenliogludev.userauthenticationservice.entity.Token;
 import com.nbenliogludev.userauthenticationservice.entity.TokenType;
 import com.nbenliogludev.userauthenticationservice.entity.User;
+import com.nbenliogludev.userauthenticationservice.repository.TokenRepository;
+import com.nbenliogludev.userauthenticationservice.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +19,6 @@ public class AuthenticationService {
     private final TokenRepository tokenRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
-    private final AuthenticationManager authenticationManager;
 
     public AuthenticationResponseDTO register(UserCreateRequestDTO request) {
         User user = User.builder()
