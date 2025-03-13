@@ -1,5 +1,6 @@
 package com.nbenliogludev.userauthenticationservice.service;
 
+import com.nbenliogludev.userauthenticationservice.dto.request.AuthenticationRequestDTO;
 import com.nbenliogludev.userauthenticationservice.dto.request.UserCreateRequestDTO;
 import com.nbenliogludev.userauthenticationservice.dto.response.AuthenticationResponseDTO;
 import com.nbenliogludev.userauthenticationservice.entity.Role;
@@ -9,8 +10,12 @@ import com.nbenliogludev.userauthenticationservice.entity.User;
 import com.nbenliogludev.userauthenticationservice.repository.TokenRepository;
 import com.nbenliogludev.userauthenticationservice.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -19,6 +24,7 @@ public class AuthenticationService {
     private final TokenRepository tokenRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
+    private final AuthenticationManager authenticationManager;
 
     public AuthenticationResponseDTO register(UserCreateRequestDTO request) {
         User user = User.builder()
@@ -31,8 +37,8 @@ public class AuthenticationService {
 
         User savedUser = repository.save(user);
 
-        var jwtToken = jwtService.generateTokenWithUserId(user, savedUser.getId());
-        var refreshToken = jwtService.generateRefreshToken(user);
+        String jwtToken = jwtService.generateTokenWithUserId(user, savedUser.getId());
+        String refreshToken = jwtService.generateRefreshToken(user);
         saveUserToken(savedUser, jwtToken);
         return AuthenticationResponseDTO.builder()
                 .accessToken(jwtToken)
@@ -41,8 +47,29 @@ public class AuthenticationService {
                 .build();
     }
 
+    public AuthenticationResponseDTO authenticate(AuthenticationRequestDTO request) {
+        authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(
+                        request.email(),
+                        request.password()
+                )
+        );
+        User user = repository.findByEmail(request.email())
+                .orElseThrow();
+
+        String jwtToken = jwtService.generateTokenWithUserId(user, user.getId());
+        String refreshToken = jwtService.generateRefreshToken(user);
+        revokeAllUserTokens(user);
+        saveUserToken(user, jwtToken);
+        return AuthenticationResponseDTO.builder()
+                .accessToken(jwtToken)
+                .refreshToken(refreshToken)
+                .id(user.getId()) // Include userId in response
+                .build();
+    }
+
     private void saveUserToken(User user, String jwtToken) {
-        var token = Token.builder()
+        Token token = Token.builder()
                 .user(user)
                 .token(jwtToken)
                 .tokenType(TokenType.BEARER)
@@ -50,5 +77,16 @@ public class AuthenticationService {
                 .revoked(false)
                 .build();
         tokenRepository.save(token);
+    }
+
+    private void revokeAllUserTokens(User user) {
+        List<Token> validUserTokens = tokenRepository.findAllValidTokenByUser(user.getId());
+        if (validUserTokens.isEmpty())
+            return;
+        validUserTokens.forEach(token -> {
+            token.setExpired(true);
+            token.setRevoked(true);
+        });
+        tokenRepository.saveAll(validUserTokens);
     }
 }

@@ -30,7 +30,7 @@ public class AuthenticationController {
     public ResponseEntity<RestResponse<AuthenticationResponseDTO>> authenticate(
             @RequestBody AuthenticationRequestDTO request
     ) {
-        return ResponseEntity.ok(service.authenticate(request));
+        return ResponseEntity.ok(RestResponse.of(service.authenticate(request)));
     }
 
 }
