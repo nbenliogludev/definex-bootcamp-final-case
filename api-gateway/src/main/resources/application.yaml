@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins: "*"
+            allowedHeaders: "*"
+            allowedMethods: "*"
+      routes:
+        - id: user-authentication-service
+          uri: lb://USER-AUTHENTICATION-SERVICE
+          predicates:
+            - Path=/api/auth/**
+        - id: file-storage-service
+          uri: lb://FILE-STORAGE-SERVICE
+          predicates:
+            - Path=/api/files/**
+
+server:
+  port: 8080
