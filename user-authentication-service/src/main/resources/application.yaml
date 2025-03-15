@@ -4,7 +4,7 @@ spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/definex.user_authentication_service_db
     username: postgres
-    password:
+    password: postgres
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
@@ -15,6 +15,12 @@ spring:
         format_sql: true
     database: postgresql
     database-platform: org.hibernate.dialect.PostgreSQLDialect
+  eureka:
+    client:
+      register-with-eureka: true
+      fetch-registry: true
+    instance:
+      prefer-ip-address: true
 
 application:
   security:
@@ -23,13 +29,6 @@ application:
       expiration: 86400000 # a day
       refresh-token:
         expiration: 604800000 # 7 days
-
-eureka:
-  client:
-    register-with-eureka: true
-    fetch-registry: true
-  instance:
-    prefer-ip-address: true
 
 server:
   port: 8081

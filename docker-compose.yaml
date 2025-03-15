@@ -1,7 +1,20 @@
 version: '3.8'
 
 services:
-  file-storage-db:
+  eureka-server:
+    build:
+      context: ./eureka-server # Ensure this is the correct path to your Eureka server project
+      dockerfile: Dockerfile
+    container_name: eureka-server
+    restart: always
+    ports:
+      - "8761:8761"
+    environment:
+      - EUREKA_INSTANCE_HOSTNAME=eureka-server
+      - EUREKA_CLIENT_REGISTER_WITH_EUREKA=false
+      - EUREKA_CLIENT_FETCH_REGISTRY=false
+
+  postgres-file-storage:
     image: postgres:15
     container_name: file-storage-db
     restart: always
@@ -12,23 +25,23 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - file_storage_db_data:/var/lib/postgresql/data
+      - postgres_file_storage_data:/var/lib/postgresql/data
 
-  user-auth-db:
+  postgres-auth-service:
     image: postgres:15
-    container_name: user-auth-db
+    container_name: auth-service-db
     restart: always
     environment:
-      POSTGRES_DB: definex.user_auth_service_db
+      POSTGRES_DB: definex.user_authentication_service_db
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
     ports:
-      - "5433:5432"
+      - "5433:5433"
     volumes:
-      - user_auth_db_data:/var/lib/postgresql/data
+      - postgres_auth_service_data:/var/lib/postgresql/data
 
 volumes:
-  file_storage_db_data:
+  postgres_file_storage_data:
     driver: local
-  user_auth_db_data:
+  postgres_auth_service_data:
     driver: local
