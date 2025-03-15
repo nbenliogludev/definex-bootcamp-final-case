@@ -2,7 +2,7 @@ spring:
   application:
     name: user-authentication-service
   datasource:
-    url: jdbc:postgresql://localhost:5432/definex.user_authentication_service_db
+    url: jdbc:postgresql://localhost:5433/definex.user_authentication_service_db
     username: postgres
     password: postgres
     driver-class-name: org.postgresql.Driver
@@ -15,12 +15,13 @@ spring:
         format_sql: true
     database: postgresql
     database-platform: org.hibernate.dialect.PostgreSQLDialect
-  eureka:
-    client:
-      register-with-eureka: true
-      fetch-registry: true
-    instance:
-      prefer-ip-address: true
+
+eureka:  # Moved out of `spring`
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+  instance:
+    prefer-ip-address: true
 
 application:
   security:
