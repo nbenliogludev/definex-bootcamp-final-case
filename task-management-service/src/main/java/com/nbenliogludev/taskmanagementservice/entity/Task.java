@@ -1,5 +1,7 @@
 package com.nbenliogludev.taskmanagementservice.entity;
 
+import com.nbenliogludev.taskmanagementservice.enums.TaskPriority;
+import com.nbenliogludev.taskmanagementservice.enums.TaskState;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

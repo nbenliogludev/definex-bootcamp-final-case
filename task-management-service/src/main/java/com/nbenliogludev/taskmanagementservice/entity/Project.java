@@ -1,5 +1,6 @@
 package com.nbenliogludev.taskmanagementservice.entity;
 
+import com.nbenliogludev.taskmanagementservice.enums.ProjectStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
