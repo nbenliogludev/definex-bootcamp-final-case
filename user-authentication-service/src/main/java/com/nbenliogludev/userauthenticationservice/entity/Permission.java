@@ -1,24 +1,42 @@
 package com.nbenliogludev.userauthenticationservice.entity;
 
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 
 /**
- * @author nbenliogludev
+ * Permissions aligned with the Advanced Task Management requirements.
  */
-@RequiredArgsConstructor
+@Getter
 public enum Permission {
 
-    ADMIN_READ("admin:read"),
-    ADMIN_UPDATE("admin:update"),
-    ADMIN_CREATE("admin:create"),
-    ADMIN_DELETE("admin:delete"),
-    MANAGER_READ("management:read"),
-    MANAGER_UPDATE("management:update"),
-    MANAGER_CREATE("management:create"),
-    MANAGER_DELETE("management:delete")
-    ;
+    // Project Permissions
+    PROJECT_READ("project:read"),
+    PROJECT_CREATE("project:create"),
+    PROJECT_UPDATE("project:update"),
+    PROJECT_DELETE("project:delete"),
 
-    @Getter
+    // Task Permissions
+    TASK_READ("task:read"),
+    TASK_CREATE("task:create"),
+    TASK_UPDATE("task:update"),
+    TASK_DELETE("task:delete"),
+
+    // Department Permissions
+    DEPARTMENT_READ("department:read"),
+    DEPARTMENT_CREATE("department:create"),
+    DEPARTMENT_UPDATE("department:update"),
+    DEPARTMENT_DELETE("department:delete"),
+
+    // Comment Permissions
+    COMMENT_ADD("comment:add"),
+    COMMENT_DELETE("comment:delete"),
+
+    // Attachment Permissions
+    ATTACHMENT_UPLOAD("attachment:upload"),
+    ATTACHMENT_DELETE("attachment:delete");
+
     private final String permission;
+
+    Permission(String permission) {
+        this.permission = permission;
+    }
 }

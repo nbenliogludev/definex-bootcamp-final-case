@@ -3,6 +3,7 @@ package com.nbenliogludev.taskmanagementservice.entity;
 import com.nbenliogludev.taskmanagementservice.enums.ProjectStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
@@ -14,7 +15,8 @@ import java.util.List;
  * @author nbenliogludev
  */
 @Entity
-@Getter @Setter
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class Project {

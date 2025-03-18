@@ -4,53 +4,53 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static com.nbenliogludev.userauthenticationservice.entity.Permission.ADMIN_CREATE;
-import static com.nbenliogludev.userauthenticationservice.entity.Permission.ADMIN_DELETE;
-import static com.nbenliogludev.userauthenticationservice.entity.Permission.ADMIN_READ;
-import static com.nbenliogludev.userauthenticationservice.entity.Permission.ADMIN_UPDATE;
-import static com.nbenliogludev.userauthenticationservice.entity.Permission.MANAGER_CREATE;
-import static com.nbenliogludev.userauthenticationservice.entity.Permission.MANAGER_DELETE;
-import static com.nbenliogludev.userauthenticationservice.entity.Permission.MANAGER_READ;
-import static com.nbenliogludev.userauthenticationservice.entity.Permission.MANAGER_UPDATE;
+import static com.nbenliogludev.userauthenticationservice.entity.Permission.*;
 
 @RequiredArgsConstructor
 public enum Role {
 
-    USER(Collections.emptySet()),
-    ADMIN(
-            Set.of(
-                    ADMIN_READ,
-                    ADMIN_UPDATE,
-                    ADMIN_DELETE,
-                    ADMIN_CREATE,
-                    MANAGER_READ,
-                    MANAGER_UPDATE,
-                    MANAGER_DELETE,
-                    MANAGER_CREATE
-            )
-    ),
-    MANAGER(
-            Set.of(
-                    MANAGER_READ,
-                    MANAGER_UPDATE,
-                    MANAGER_DELETE,
-                    MANAGER_CREATE
-            )
-    )
+    USER(Set.of(
+            PROJECT_READ,
+            TASK_READ,
+            DEPARTMENT_READ,
+            COMMENT_ADD,
+            ATTACHMENT_UPLOAD
+    )),
 
-    ;
+    MANAGER(Set.of(
+            // All USER perms
+            PROJECT_READ,
+            TASK_READ,
+            DEPARTMENT_READ,
+            COMMENT_ADD,
+            ATTACHMENT_UPLOAD,
+            // Additional create/update perms
+            PROJECT_CREATE,
+            PROJECT_UPDATE,
+            TASK_CREATE,
+            TASK_UPDATE,
+            DEPARTMENT_CREATE,
+            DEPARTMENT_UPDATE
+    )),
+
+    ADMIN(Set.of(
+            // Everything
+            PROJECT_READ, PROJECT_CREATE, PROJECT_UPDATE, PROJECT_DELETE,
+            TASK_READ, TASK_CREATE, TASK_UPDATE, TASK_DELETE,
+            DEPARTMENT_READ, DEPARTMENT_CREATE, DEPARTMENT_UPDATE, DEPARTMENT_DELETE,
+            COMMENT_ADD, COMMENT_DELETE,
+            ATTACHMENT_UPLOAD, ATTACHMENT_DELETE
+    ));
 
     @Getter
     private final Set<Permission> permissions;
 
     public List<SimpleGrantedAuthority> getAuthorities() {
-        var authorities = getPermissions()
-                .stream()
+        var authorities = permissions.stream()
                 .map(permission -> new SimpleGrantedAuthority(permission.getPermission()))
                 .collect(Collectors.toList());
         authorities.add(new SimpleGrantedAuthority("ROLE_" + this.name()));
