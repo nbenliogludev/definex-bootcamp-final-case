@@ -47,7 +47,9 @@ public class Task {
     @OneToMany(mappedBy = "task", cascade = CascadeType.ALL)
     private List<Comment> comments = new ArrayList<>();
 
-    @OneToMany(mappedBy = "task", cascade = CascadeType.ALL)
-    private List<Attachment> attachments = new ArrayList<>();
+    @ElementCollection
+    @CollectionTable(name = "task_attachments", joinColumns = @JoinColumn(name = "task_id"))
+    @Column(name = "attachment_id")
+    private List<UUID> attachments;
 }
 
