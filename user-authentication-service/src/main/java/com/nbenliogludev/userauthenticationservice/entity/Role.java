@@ -16,35 +16,22 @@ import static com.nbenliogludev.userauthenticationservice.entity.Permission.*;
 @RequiredArgsConstructor
 public enum Role {
 
-    USER(Set.of(
-            PROJECT_READ,
-            TASK_READ,
-            DEPARTMENT_READ,
-            COMMENT_ADD,
-            ATTACHMENT_UPLOAD
+    GROUP_PROJECT_MANAGER(Set.of(
+
     )),
 
-    MANAGER(Set.of(
-            PROJECT_READ,
-            TASK_READ,
-            DEPARTMENT_READ,
-            COMMENT_ADD,
-            ATTACHMENT_UPLOAD,
-            PROJECT_CREATE,
-            PROJECT_UPDATE,
-            TASK_CREATE,
-            TASK_UPDATE,
-            DEPARTMENT_CREATE,
-            DEPARTMENT_UPDATE
+    PROJECT_MANAGER(Set.of(
+
     )),
 
-    ADMIN(Set.of(
-            PROJECT_READ, PROJECT_CREATE, PROJECT_UPDATE, PROJECT_DELETE,
-            TASK_READ, TASK_CREATE, TASK_UPDATE, TASK_DELETE,
-            DEPARTMENT_READ, DEPARTMENT_CREATE, DEPARTMENT_UPDATE, DEPARTMENT_DELETE,
-            COMMENT_ADD, COMMENT_DELETE,
-            ATTACHMENT_UPLOAD, ATTACHMENT_DELETE
+    TEAM_LEADER(Set.of(
+
+    )),
+
+    TEAM_MEMBER(Set.of(
+
     ));
+
 
     @Getter
     private final Set<Permission> permissions;

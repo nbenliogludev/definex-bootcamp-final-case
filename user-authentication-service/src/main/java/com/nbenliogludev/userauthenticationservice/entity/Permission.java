@@ -2,11 +2,13 @@ package com.nbenliogludev.userauthenticationservice.entity;
 
 import lombok.Getter;
 
-/**
- * @author nbenliogludev
- */
 @Getter
 public enum Permission {
+
+    DEPARTMENT_READ("department:read"),
+    DEPARTMENT_CREATE("department:create"),
+    DEPARTMENT_UPDATE("department:update"),
+    DEPARTMENT_DELETE("department:delete"),
 
     PROJECT_READ("project:read"),
     PROJECT_CREATE("project:create"),
@@ -14,14 +16,11 @@ public enum Permission {
     PROJECT_DELETE("project:delete"),
 
     TASK_READ("task:read"),
-    TASK_CREATE("task:create"),
-    TASK_UPDATE("task:update"),
+    TASK_UPDATE_DETAILS("task:update_details"),
+    TASK_UPDATE_STATE("task:update_state"),
+    TASK_UPDATE_ATTACHMENTS("task:update_attachments"),
+    TASK_UPDATE_PRIORITY("task:update_priority"),
     TASK_DELETE("task:delete"),
-
-    DEPARTMENT_READ("department:read"),
-    DEPARTMENT_CREATE("department:create"),
-    DEPARTMENT_UPDATE("department:update"),
-    DEPARTMENT_DELETE("department:delete"),
 
     COMMENT_ADD("comment:add"),
     COMMENT_DELETE("comment:delete"),

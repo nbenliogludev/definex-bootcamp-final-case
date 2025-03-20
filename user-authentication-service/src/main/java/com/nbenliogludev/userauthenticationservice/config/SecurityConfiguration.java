@@ -19,7 +19,7 @@ import static com.nbenliogludev.userauthenticationservice.entity.Permission.MANA
 import static com.nbenliogludev.userauthenticationservice.entity.Permission.MANAGER_READ;
 import static com.nbenliogludev.userauthenticationservice.entity.Permission.MANAGER_UPDATE;
 import static com.nbenliogludev.userauthenticationservice.entity.Role.ADMIN;
-import static com.nbenliogludev.userauthenticationservice.entity.Role.MANAGER;
+import static com.nbenliogludev.userauthenticationservice.entity.Role.PROJECT_MANAGER;
 import static org.springframework.http.HttpMethod.DELETE;
 import static org.springframework.http.HttpMethod.GET;
 import static org.springframework.http.HttpMethod.POST;
@@ -54,7 +54,7 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests(req ->
                         req.requestMatchers(WHITE_LIST_URL)
                                 .permitAll()
-                                .requestMatchers("/api/v1/management/**").hasAnyRole(ADMIN.name(), MANAGER.name())
+                                .requestMatchers("/api/v1/management/**").hasAnyRole(ADMIN.name(), PROJECT_MANAGER.name())
                                 .requestMatchers(GET, "/api/v1/management/**").hasAnyAuthority(ADMIN_READ.name(), MANAGER_READ.name())
                                 .requestMatchers(POST, "/api/v1/management/**").hasAnyAuthority(ADMIN_CREATE.name(), MANAGER_CREATE.name())
                                 .requestMatchers(PUT, "/api/v1/management/**").hasAnyAuthority(ADMIN_UPDATE.name(), MANAGER_UPDATE.name())
