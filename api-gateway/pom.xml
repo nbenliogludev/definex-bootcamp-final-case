@@ -48,13 +48,6 @@
 			<scope>test</scope>
 		</dependency>
 
-		<!-- Feign Client -->
-		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-openfeign</artifactId>
-			<version>4.1.0</version>
-		</dependency>
-
 	</dependencies>
 	<dependencyManagement>
 		<dependencies>
