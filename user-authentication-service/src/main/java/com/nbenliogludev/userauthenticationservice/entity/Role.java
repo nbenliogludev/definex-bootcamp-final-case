@@ -32,7 +32,7 @@ public enum Role {
             TASK_UPDATE_PRIORITY,
             TASK_DELETE,
             COMMENT_ADD,
-            ATTACHMENT_UPLOAD,
+            ATTACHMENT_UPLOAD
     )),
 
     PROJECT_MANAGER(Set.of(
