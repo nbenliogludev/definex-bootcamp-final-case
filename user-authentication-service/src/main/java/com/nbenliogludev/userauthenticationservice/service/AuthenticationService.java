@@ -32,7 +32,7 @@ public class AuthenticationService {
                 .lastname(request.surname())
                 .email(request.email())
                 .password(passwordEncoder.encode(request.password()))
-                .role(Role.USER)
+                .role(Role.TEAM_MEMBER)
                 .build();
 
         User savedUser = repository.save(user);
