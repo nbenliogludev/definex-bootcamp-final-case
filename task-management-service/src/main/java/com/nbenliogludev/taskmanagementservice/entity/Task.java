@@ -36,15 +36,13 @@ public class Task {
     @Enumerated(EnumType.STRING)
     private TaskPriority priority;
 
-    private String reason; // Required if Cancelled/Blocked
+    private String reason;
 
     @ManyToOne
     @JoinColumn(name = "project_id")
     private Project project;
 
-    @ManyToOne
-    @JoinColumn(name = "assignee_id")
-    private User assignee;
+    private UUID assigneeId;
 
     @OneToMany(mappedBy = "task", cascade = CascadeType.ALL)
     private List<Comment> comments = new ArrayList<>();
