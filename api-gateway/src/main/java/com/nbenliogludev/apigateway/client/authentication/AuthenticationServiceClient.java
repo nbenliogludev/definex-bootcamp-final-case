@@ -1,7 +1,7 @@
 package com.nbenliogludev.apigateway.client.authentication;
 
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 
 /**
@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestHeader;
 @FeignClient(name = "user-authentication-service", url = "lb://USER-AUTHENTICATION-SERVICE")
 public interface AuthenticationServiceClient {
 
-    @GetMapping("/api/auth/v1/validate")
+    @PostMapping("/api/auth/v1/validate-token")
     boolean validateToken(@RequestHeader("Authorization") String token);
 }
 
