@@ -7,10 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * @author nbenliogludev
@@ -45,6 +42,10 @@ public class Project {
             joinColumns = @JoinColumn(name = "project_id"),
             inverseJoinColumns = @JoinColumn(name = "user_id")
     )
-    private Set<User> teamMembers = new HashSet<>();
+
+    @ElementCollection
+    @CollectionTable(name = "project_members", joinColumns = @JoinColumn(name = "project_id"))
+    @Column(name = "user_id")
+    private Set<UUID> teamMembersIds = new HashSet<>();
 }
 
