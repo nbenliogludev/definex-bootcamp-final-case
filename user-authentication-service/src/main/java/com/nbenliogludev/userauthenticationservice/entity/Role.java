@@ -10,6 +10,9 @@ import java.util.stream.Collectors;
 
 import static com.nbenliogludev.userauthenticationservice.entity.Permission.*;
 
+/**
+ * @author nbenliogludev
+ */
 @RequiredArgsConstructor
 public enum Role {
 
@@ -22,13 +25,11 @@ public enum Role {
     )),
 
     MANAGER(Set.of(
-            // All USER perms
             PROJECT_READ,
             TASK_READ,
             DEPARTMENT_READ,
             COMMENT_ADD,
             ATTACHMENT_UPLOAD,
-            // Additional create/update perms
             PROJECT_CREATE,
             PROJECT_UPDATE,
             TASK_CREATE,
@@ -38,7 +39,6 @@ public enum Role {
     )),
 
     ADMIN(Set.of(
-            // Everything
             PROJECT_READ, PROJECT_CREATE, PROJECT_UPDATE, PROJECT_DELETE,
             TASK_READ, TASK_CREATE, TASK_UPDATE, TASK_DELETE,
             DEPARTMENT_READ, DEPARTMENT_CREATE, DEPARTMENT_UPDATE, DEPARTMENT_DELETE,
