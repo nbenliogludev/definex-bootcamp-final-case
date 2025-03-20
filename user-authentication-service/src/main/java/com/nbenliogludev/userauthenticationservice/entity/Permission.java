@@ -20,13 +20,12 @@ public enum Permission {
     TASK_UPDATE_STATE("task:update_state"),
     TASK_UPDATE_ATTACHMENTS("task:update_attachments"),
     TASK_UPDATE_PRIORITY("task:update_priority"),
+    TASK_ASSIGN_MEMBER("task:assign_member"),
     TASK_DELETE("task:delete"),
 
     COMMENT_ADD("comment:add"),
-    COMMENT_DELETE("comment:delete"),
 
-    ATTACHMENT_UPLOAD("attachment:upload"),
-    ATTACHMENT_DELETE("attachment:delete");
+    ATTACHMENT_UPLOAD("attachment:upload");
 
     private final String permission;
 
