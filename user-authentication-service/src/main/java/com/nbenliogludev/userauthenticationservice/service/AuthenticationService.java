@@ -37,7 +37,7 @@ public class AuthenticationService {
 
         User savedUser = repository.save(user);
 
-        String jwtToken = jwtService.generateTokenWithUserId(user, savedUser.getId());
+        String jwtToken = jwtService.generateTokenWithRolesAndPermissions(savedUser);
         String refreshToken = jwtService.generateRefreshToken(user);
         saveUserToken(savedUser, jwtToken);
         return AuthenticationResponseDTO.builder()
@@ -58,7 +58,7 @@ public class AuthenticationService {
         User user = repository.findByEmail(request.email())
                 .orElseThrow();
 
-        String jwtToken = jwtService.generateTokenWithUserId(user, user.getId());
+        String jwtToken = jwtService.generateTokenWithRolesAndPermissions(user);
         String refreshToken = jwtService.generateRefreshToken(user);
         revokeAllUserTokens(user);
         saveUserToken(user, jwtToken);

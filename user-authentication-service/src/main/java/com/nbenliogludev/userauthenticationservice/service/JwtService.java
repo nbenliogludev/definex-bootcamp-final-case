@@ -1,5 +1,6 @@
 package com.nbenliogludev.userauthenticationservice.service;
 
+import com.nbenliogludev.userauthenticationservice.entity.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 import java.security.Key;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 
@@ -46,10 +48,18 @@ public class JwtService {
         return buildToken(extraClaims, userDetails, jwtExpiration);
     }
 
-    public String generateTokenWithUserId(UserDetails userDetails, Long userId) {
+    public String generateTokenWithRolesAndPermissions(User user) {
         Map<String, Object> extraClaims = new HashMap<>();
-        extraClaims.put("userId", userId);
-        return buildToken(extraClaims, userDetails, jwtExpiration);
+        extraClaims.put("userId", user.getId());
+        extraClaims.put("role", user.getRole().name());
+
+        List<String> permissionStrings = user.getRole().getPermissions()
+                .stream()
+                .map(perm -> perm.getPermission())
+                .toList();
+        extraClaims.put("permissions", permissionStrings);
+
+        return buildToken(extraClaims, user, jwtExpiration);
     }
 
     public String generateRefreshToken(UserDetails userDetails) {
