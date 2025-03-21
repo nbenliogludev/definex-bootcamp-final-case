@@ -3,6 +3,7 @@ package com.nbenliogludev.taskmanagementservice.controller;
 import com.nbenliogludev.taskmanagementservice.dto.request.DepartmentCreateRequestDTO;
 import com.nbenliogludev.taskmanagementservice.dto.response.DepartmentCreateResponseDTO;
 import com.nbenliogludev.taskmanagementservice.dto.response.RestResponse;
+import com.nbenliogludev.taskmanagementservice.service.DepartmentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -23,7 +24,7 @@ public class DepartmentController {
     private final DepartmentService departmentService;
 
     @PostMapping("/v1")
-    public ResponseEntity<RestResponse<DepartmentCreateResponseDTO>> createTask(@RequestBody DepartmentCreateRequestDTO depaptmentDto) {
+    public ResponseEntity<RestResponse<DepartmentCreateResponseDTO>> createDepartment(@RequestBody DepartmentCreateRequestDTO depaptmentDto) {
         return ResponseEntity.ok(RestResponse.of(departmentService.createDepartment(depaptmentDto)));
     }
 
