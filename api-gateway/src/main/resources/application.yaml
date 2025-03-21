@@ -10,6 +10,10 @@ spring:
             allowedHeaders: "*"
             allowedMethods: "*"
       routes:
+        - id: task-management-service
+          uri: lb://TASK-MANAGEMENT-SERVICE
+          predicates:
+            - Path=/api/task-management/**
         - id: user-authentication-service
           uri: lb://USER-AUTHENTICATION-SERVICE
           predicates:
