@@ -1,8 +1,8 @@
 package com.nbenliogludev.taskmanagementservice.controller;
 
-import com.nbenliogludev.taskmanagementservice.dto.request.TaskCreateRequestDTO;
+import com.nbenliogludev.taskmanagementservice.dto.request.DepartmentCreateRequestDTO;
+import com.nbenliogludev.taskmanagementservice.dto.response.DepartmentCreateResponseDTO;
 import com.nbenliogludev.taskmanagementservice.dto.response.RestResponse;
-import com.nbenliogludev.taskmanagementservice.dto.response.TaskCreateResponseDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -15,16 +15,16 @@ import org.springframework.web.bind.annotation.RestController;
  * @author nbenliogludev
  */
 @RestController
-@RequestMapping("/api/tasks")
+@RequestMapping("/api/departments")
 @Validated
 @RequiredArgsConstructor
-public class TaskManagementController {
+public class DepartmentController {
 
-//    private final TaskService taskService;
-//
-//    @PostMapping("/v1")
-//    public ResponseEntity<RestResponse<TaskCreateResponseDTO>> createTask(@RequestBody TaskCreateRequestDTO taskDto) {
-//        return ResponseEntity.ok(RestResponse.of(taskService.createTask(taskDto)));
-//    }
+    private final DepartmentService departmentService;
+
+    @PostMapping("/v1")
+    public ResponseEntity<RestResponse<DepartmentCreateResponseDTO>> createTask(@RequestBody DepartmentCreateRequestDTO depaptmentDto) {
+        return ResponseEntity.ok(RestResponse.of(departmentService.createDepartment(depaptmentDto)));
+    }
 
 }
