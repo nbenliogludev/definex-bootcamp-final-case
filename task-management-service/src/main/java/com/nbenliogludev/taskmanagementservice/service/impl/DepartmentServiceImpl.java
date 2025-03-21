@@ -4,6 +4,7 @@ import com.nbenliogludev.taskmanagementservice.dto.request.DepartmentCreateReque
 import com.nbenliogludev.taskmanagementservice.dto.response.DepartmentCreateResponseDTO;
 import com.nbenliogludev.taskmanagementservice.entity.Department;
 import com.nbenliogludev.taskmanagementservice.mapper.DepartmentMapper;
+import com.nbenliogludev.taskmanagementservice.repository.DepartmentRepository;
 import com.nbenliogludev.taskmanagementservice.service.DepartmentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
