@@ -22,6 +22,7 @@ public class AuthenticationController {
     public ResponseEntity<RestResponse<AuthenticationResponseDTO>> register(
             @RequestBody UserCreateRequestDTO request
     ) {
+        System.out.println(request.toString());
         return ResponseEntity.ok(RestResponse.of(service.register(request)));
     }
 

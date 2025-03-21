@@ -1,8 +1,8 @@
 spring:
   application:
-    name: user-authentication-service
+    name: task-management-service
   datasource:
-    url: jdbc:postgresql://localhost:5433/definex.user_authentication_service_db
+    url: jdbc:postgresql://localhost:5434/definex.task_management_service_db
     username: postgres
     password: postgres
     driver-class-name: org.postgresql.Driver
@@ -23,13 +23,5 @@ eureka:
   instance:
     prefer-ip-address: true
 
-application:
-  security:
-    jwt:
-      secret-key: 404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970
-      expiration: 86400000
-      refresh-token:
-        expiration: 604800000
-
 server:
-  port: 8083
+  port: 8081

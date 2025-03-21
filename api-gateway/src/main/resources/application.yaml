@@ -19,9 +19,6 @@ spring:
           predicates:
             - Path=/api/files/**
 
-server:
-  port: 8080
-
 application:
   security:
     jwt:
@@ -29,3 +26,7 @@ application:
       expiration: 86400000 # e.g. 1 day in milliseconds
       refresh-token:
         expiration: 604800000 # e.g. 7 days in milliseconds
+
+
+server:
+  port: 8080

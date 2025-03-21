@@ -3,7 +3,7 @@ version: '3.8'
 services:
   eureka-server:
     build:
-      context: ./eureka-server # Ensure this is the correct path to your Eureka server project
+      context: ./eureka-server
       dockerfile: Dockerfile
     container_name: eureka-server
     restart: always

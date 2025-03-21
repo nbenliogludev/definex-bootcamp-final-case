@@ -43,7 +43,7 @@ public class AuthenticationService {
         return AuthenticationResponseDTO.builder()
                 .accessToken(jwtToken)
                 .refreshToken(refreshToken)
-                .id(savedUser.getId()) // Include userId in response
+                .id(savedUser.getId())
                 .build();
     }
 
