@@ -24,17 +24,17 @@ public class CommentController {
 
     @PostMapping("/v1")
     public ResponseEntity<RestResponse<CommentCreateResponseDTO>> createComment(@RequestBody CommentCreateRequestDTO commentDto) {
-        return ResponseEntity.ok(RestResponse.of(commentService.createDepartment(commentDto)));
+        return ResponseEntity.ok(RestResponse.of(commentService.createComment(commentDto)));
     }
 
     @GetMapping("/v1")
     public ResponseEntity<RestResponse<List<CommentCreateResponseDTO>>> getAllComments() {
-        return ResponseEntity.ok(RestResponse.of(commentService.getAllDepartments()));
+        return ResponseEntity.ok(RestResponse.of(commentService.getAllComments()));
     }
 
     @DeleteMapping("/v1/{id}")
     public ResponseEntity<RestResponse<Void>> deleteComment(@PathVariable UUID id) {
-        commentService.deleteDepartment(id);
+        commentService.deleteComment(id);
         return ResponseEntity.ok(RestResponse.empty());
     }
 
