@@ -1,6 +1,7 @@
 package com.nbenliogludev.taskmanagementservice.service.impl;
 
 import com.nbenliogludev.taskmanagementservice.dto.request.ProjectCreateRequestDTO;
+import com.nbenliogludev.taskmanagementservice.dto.request.ProjectUpdateRequestDTO;
 import com.nbenliogludev.taskmanagementservice.dto.response.ProjectCreateResponseDTO;
 import com.nbenliogludev.taskmanagementservice.entity.Department;
 import com.nbenliogludev.taskmanagementservice.entity.Project;
@@ -43,4 +44,33 @@ public class ProjectServiceImpl implements ProjectService {
                 .map(projectMapper::mapToProjectResponse)
                 .toList();
     }
+
+    @Override
+    public ProjectCreateResponseDTO updateProject(ProjectUpdateRequestDTO request) {
+        Project project = projectRepository.findById(request.id())
+                .orElseThrow(() -> new RuntimeException("Project not found"));
+
+        project.setTitle(request.title());
+        project.setDescription(request.description());
+        project.setStatus(request.status());
+
+        Department department = departmentRepository.findById(request.departmentId())
+                .orElseThrow(() -> new RuntimeException("Department not found"));
+
+        project.setDepartment(department);
+        project.setTeamMembersIds(request.teamMembersIds());
+
+        Project updated = projectRepository.save(project);
+        return new ProjectCreateResponseDTO(
+                updated.getId(),
+                updated.getTitle(),
+                updated.getDescription(),
+                updated.getStatus(),
+                updated.getDepartment().getId(),
+                updated.getTeamMembersIds()
+        );
+    }
+
+
+
 }

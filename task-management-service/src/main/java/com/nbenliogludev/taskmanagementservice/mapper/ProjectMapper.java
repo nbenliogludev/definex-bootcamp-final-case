@@ -1,10 +1,12 @@
 package com.nbenliogludev.taskmanagementservice.mapper;
 
 import com.nbenliogludev.taskmanagementservice.dto.request.ProjectCreateRequestDTO;
+import com.nbenliogludev.taskmanagementservice.dto.request.ProjectUpdateRequestDTO;
 import com.nbenliogludev.taskmanagementservice.dto.response.ProjectCreateResponseDTO;
 import com.nbenliogludev.taskmanagementservice.entity.Project;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
 import org.mapstruct.ReportingPolicy;
 
 /**
@@ -21,4 +23,9 @@ public interface ProjectMapper {
     @Mapping(source = "department.id", target = "departmentId")
     @Mapping(source = "teamMembersIds", target = "teamMemberIds")
     ProjectCreateResponseDTO mapToProjectResponse(Project project);
+
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "tasks", ignore = true)
+    @Mapping(target = "department", ignore = true)
+    void updateProjectFromDto(ProjectUpdateRequestDTO request);
 }
