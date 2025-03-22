@@ -11,6 +11,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 /**
  * @author nbenliogludev
@@ -36,5 +37,11 @@ public class ProjectController {
     public ResponseEntity<RestResponse<ProjectCreateResponseDTO>> updateProject(
             @RequestBody ProjectUpdateRequestDTO request) {
         return ResponseEntity.ok(RestResponse.of(projectService.updateProject(request)));
+    }
+
+    @DeleteMapping("/v1/{id}")
+    public ResponseEntity<RestResponse<Void>> deleteProject(@PathVariable UUID id) {
+        projectService.deleteProject(id);
+        return ResponseEntity.ok(RestResponse.empty());
     }
 }

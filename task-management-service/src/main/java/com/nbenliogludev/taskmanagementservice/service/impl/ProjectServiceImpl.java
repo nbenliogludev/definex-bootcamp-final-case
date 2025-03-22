@@ -13,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 /**
  * @author nbenliogludev
@@ -71,6 +72,10 @@ public class ProjectServiceImpl implements ProjectService {
         );
     }
 
-
-
+    @Override
+    public void deleteProject(UUID id) {
+        Project project = projectRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Project not found"));
+        projectRepository.delete(project);
+    }
 }
