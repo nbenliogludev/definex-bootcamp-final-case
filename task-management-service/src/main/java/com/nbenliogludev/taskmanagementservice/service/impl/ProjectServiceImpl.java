@@ -3,6 +3,7 @@ package com.nbenliogludev.taskmanagementservice.service.impl;
 import com.nbenliogludev.taskmanagementservice.dto.request.ProjectCreateRequestDTO;
 import com.nbenliogludev.taskmanagementservice.dto.response.ProjectCreateResponseDTO;
 import com.nbenliogludev.taskmanagementservice.entity.Project;
+import com.nbenliogludev.taskmanagementservice.repository.ProjectRepository;
 import com.nbenliogludev.taskmanagementservice.service.ProjectService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
