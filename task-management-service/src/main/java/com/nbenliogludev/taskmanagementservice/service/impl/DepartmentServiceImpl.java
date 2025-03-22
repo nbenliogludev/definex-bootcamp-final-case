@@ -1,6 +1,7 @@
 package com.nbenliogludev.taskmanagementservice.service.impl;
 
 import com.nbenliogludev.taskmanagementservice.dto.request.DepartmentCreateRequestDTO;
+import com.nbenliogludev.taskmanagementservice.dto.request.DepartmentUpdateRequestDTO;
 import com.nbenliogludev.taskmanagementservice.dto.response.DepartmentCreateResponseDTO;
 import com.nbenliogludev.taskmanagementservice.entity.Department;
 import com.nbenliogludev.taskmanagementservice.mapper.DepartmentMapper;
@@ -36,5 +37,16 @@ public class DepartmentServiceImpl implements DepartmentService {
         return departments.stream()
                 .map(departmentMapper::mapToDepartmentResponse)
                 .toList();
+    }
+
+    @Override
+    public DepartmentCreateResponseDTO updateDepartment(DepartmentUpdateRequestDTO request) {
+        Department department = departmentRepository.findById(request.id())
+                .orElseThrow(() -> new RuntimeException("Department not found"));
+
+        department.setName(request.name());
+        Department updated = departmentRepository.save(department);
+
+        return new DepartmentCreateResponseDTO(updated.getId(), updated.getName());
     }
 }
