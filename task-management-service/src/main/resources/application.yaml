@@ -16,12 +16,12 @@ spring:
     database: postgresql
     database-platform: org.hibernate.dialect.PostgreSQLDialect
 
-eureka:
-  client:
-    register-with-eureka: true
-    fetch-registry: true
-  instance:
-    prefer-ip-address: true
+  eureka:
+    client:
+      register-with-eureka: true
+      fetch-registry: true
+    instance:
+      prefer-ip-address: true
 
 server:
   port: 8081

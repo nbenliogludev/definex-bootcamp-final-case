@@ -14,9 +14,9 @@ services:
       - EUREKA_CLIENT_REGISTER_WITH_EUREKA=false
       - EUREKA_CLIENT_FETCH_REGISTRY=false
 
-  postgres-file-storage:
+  postgres-file-storage-service:
     image: postgres:15
-    container_name: file-storage-db
+    container_name: file-storage-service-db
     restart: always
     environment:
       POSTGRES_DB: definex.file_storage_service_db
@@ -25,7 +25,7 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - postgres_file_storage_data:/var/lib/postgresql/data
+      - postgres_file_storage_service_data:/var/lib/postgresql/data
 
   postgres-auth-service:
     image: postgres:15
@@ -40,8 +40,24 @@ services:
     volumes:
       - postgres_auth_service_data:/var/lib/postgresql/data
 
+  postgres-task-management-service:
+    image: postgres:15
+    container_name: task-management-service-db
+    restart: always
+    environment:
+      POSTGRES_DB: definex.task_management_service_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5434:5432"
+    volumes:
+      - postgres_task_management_service_data:/var/lib/postgresql/data
+
 volumes:
-  postgres_file_storage_data:
+  postgres_file_storage_service_data:
     driver: local
   postgres_auth_service_data:
     driver: local
+  postgres_task_management_service_data:
+    driver: local
+

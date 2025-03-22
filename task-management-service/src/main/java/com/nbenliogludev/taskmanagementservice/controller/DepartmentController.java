@@ -1,6 +1,7 @@
 package com.nbenliogludev.taskmanagementservice.controller;
 
 import com.nbenliogludev.taskmanagementservice.dto.request.DepartmentCreateRequestDTO;
+import com.nbenliogludev.taskmanagementservice.dto.request.DepartmentUpdateRequestDTO;
 import com.nbenliogludev.taskmanagementservice.dto.response.DepartmentCreateResponseDTO;
 import com.nbenliogludev.taskmanagementservice.dto.response.RestResponse;
 import com.nbenliogludev.taskmanagementservice.service.DepartmentService;
@@ -27,9 +28,14 @@ public class DepartmentController {
         return ResponseEntity.ok(RestResponse.of(departmentService.createDepartment(depaptmentDto)));
     }
 
-    @GetMapping
+    @GetMapping("/v1")
     public ResponseEntity<RestResponse<List<DepartmentCreateResponseDTO>>> getAllDepartments() {
         return ResponseEntity.ok(RestResponse.of(departmentService.getAllDepartments()));
+    }
+
+    @PutMapping("/v1")
+    public ResponseEntity<RestResponse<DepartmentCreateResponseDTO>> updateDepartment(@RequestBody DepartmentUpdateRequestDTO request) {
+        return ResponseEntity.ok(RestResponse.of(departmentService.updateDepartment(request)));
     }
 
 }
