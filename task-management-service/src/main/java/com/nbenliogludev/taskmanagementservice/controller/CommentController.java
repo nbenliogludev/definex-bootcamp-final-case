@@ -28,8 +28,8 @@ public class CommentController {
     }
 
     @GetMapping("/v1")
-    public ResponseEntity<RestResponse<List<CommentCreateResponseDTO>>> getAllComments() {
-        return ResponseEntity.ok(RestResponse.of(commentService.getAllComments()));
+    public ResponseEntity<RestResponse<List<CommentCreateResponseDTO>>> getCommentsByTaskId() {
+        return ResponseEntity.ok(RestResponse.of(commentService.getCommentsByTaskId()));
     }
 
     @DeleteMapping("/v1/{id}")
