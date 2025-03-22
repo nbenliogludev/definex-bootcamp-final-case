@@ -3,6 +3,7 @@ package com.nbenliogludev.taskmanagementservice.controller;
 import com.nbenliogludev.taskmanagementservice.dto.request.CommentCreateRequestDTO;
 import com.nbenliogludev.taskmanagementservice.dto.response.CommentCreateResponseDTO;
 import com.nbenliogludev.taskmanagementservice.dto.response.RestResponse;
+import com.nbenliogludev.taskmanagementservice.service.CommentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
