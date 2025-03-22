@@ -11,6 +11,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 /**
  * @author nbenliogludev
@@ -36,6 +37,12 @@ public class DepartmentController {
     @PutMapping("/v1")
     public ResponseEntity<RestResponse<DepartmentCreateResponseDTO>> updateDepartment(@RequestBody DepartmentUpdateRequestDTO request) {
         return ResponseEntity.ok(RestResponse.of(departmentService.updateDepartment(request)));
+    }
+
+    @DeleteMapping("/v1/{id}")
+    public ResponseEntity<RestResponse<Void>> deleteDepartment(@PathVariable UUID id) {
+        departmentService.deleteDepartment(id);
+        return ResponseEntity.ok(RestResponse.empty());
     }
 
 }

@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 /**
  * @author nbenliogludev
@@ -48,5 +49,12 @@ public class DepartmentServiceImpl implements DepartmentService {
         Department updated = departmentRepository.save(department);
 
         return new DepartmentCreateResponseDTO(updated.getId(), updated.getName());
+    }
+
+    @Override
+    public void deleteDepartment(UUID id) {
+        Department department = departmentRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Department not found"));
+        departmentRepository.delete(department);
     }
 }
