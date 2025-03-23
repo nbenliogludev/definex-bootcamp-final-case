@@ -18,8 +18,6 @@ Email: [nikbenlioglu@gmail.com](mailto:nikbenlioglu@gmail.com)
 - docker-compose.yml dosyası hazırlandı.
 - Swagger API dokümantasyonu eklendi.
 
-Projeyi `Docker` kullanarak nasıl çalıştırabileceğinizi öğrenmek için [Docker](#docker) bölümünü inceleyiniz.
-
 # Docker
 
 Projeyi çalıştırmak için Docker kullanabilirsiniz. [Docker](https://www.docker.com/products/docker-desktop) sayfasından docker'ı indirebilirsiniz.
