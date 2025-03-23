@@ -53,11 +53,11 @@ Aşağıda projeye ait mikroservislerin listesi bulunmaktadır.<br>
 
 Task Management Servisi, projeler, görevler, yorumlar ve departmanlar gibi bileşenlerin yönetimini sağlayan bir servistir. Görev atama, görev durumu güncelleme, yorum ekleme gibi işlemleri destekler.
 
-# File Storage Servis - [Task management service](task-management-service)
+# File Storage Servis - [Task management service](file-storage-service)
 
 File Storage Servisi, yüklenen dosyaları sunucuda saklar ve bu dosyalarla ilgili meta bilgileri PostgreSQL veritabanında tutar. Dosya yükleme, indirme, silme ve doğrulama işlemleri için API sunar.
 
-## UserAuthenticationService
+# UserAuthenticationService
 
 AuthenticationService, JWT kullanarak kullanıcı kimlik doğrulama işlemlerini yönetir. Kullanıcı kayıt, giriş, yetkilendirme ve token yönetimi gibi işlemleri sağlar. Roller ve izinler ile güvenlik kontrolü gerçekleştirir.
 
