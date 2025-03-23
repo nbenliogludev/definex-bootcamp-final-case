@@ -15,4 +15,6 @@ public interface ProjectService {
     List<ProjectCreateResponseDTO> getAllProjects();
     ProjectCreateResponseDTO updateProject(ProjectUpdateRequestDTO request);
     void deleteProject(UUID id);
+    void addMember(UUID projectId, UUID userId);
+    void removeMember(UUID projectId, UUID userId);
 }
