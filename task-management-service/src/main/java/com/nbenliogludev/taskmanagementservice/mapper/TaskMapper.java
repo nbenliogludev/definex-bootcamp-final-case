@@ -16,6 +16,7 @@ public interface TaskMapper {
 
     @Mapping(source = "id", target = "taskId")
     @Mapping(source = "project.id", target = "projectId")
+    @Mapping(target = "assigneeId", expression = "java(task.getAssigneeId() != null ? task.getAssigneeId().toString() : null)")
     TaskCreateResponseDTO mapToTaskResponse(Task task);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)

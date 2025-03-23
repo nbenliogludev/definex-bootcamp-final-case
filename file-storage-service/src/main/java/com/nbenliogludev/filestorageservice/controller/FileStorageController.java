@@ -56,4 +56,13 @@ public class FileStorageController {
         fileStorageService.deleteFileById(fileId);
         return ResponseEntity.ok(RestResponse.of("File marked as deleted. ID: " + fileId));
     }
+
+    @GetMapping("/validate/{id}")
+    public ResponseEntity<Void> validateFile(@PathVariable UUID id) {
+        if (fileStorageService.existsById(id)) {
+            return ResponseEntity.ok().build();
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
 }

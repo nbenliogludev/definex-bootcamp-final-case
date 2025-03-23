@@ -13,4 +13,6 @@ public interface FileStorageService {
     Resource loadFileAsResourceById(UUID fileId);
 
     void deleteFileById(UUID fileId);
+
+    boolean existsById(UUID id);
 }

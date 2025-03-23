@@ -113,4 +113,9 @@ public class FileStorageServiceImpl implements FileStorageService {
         String fileExtension = fileName.substring(fileName.lastIndexOf('.') + 1).toLowerCase();
         return ALLOWED_FILE_EXTENSIONS.contains(fileExtension);
     }
+
+    @Override
+    public boolean existsById(UUID id) {
+        return fileStorageRepository.existsById(id);
+    }
 }
