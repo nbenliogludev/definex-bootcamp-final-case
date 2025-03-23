@@ -20,7 +20,7 @@ import java.util.UUID;
 @RequestMapping("/api/tasks")
 @Validated
 @RequiredArgsConstructor
-public class TaskManagementController {
+public class TaskController {
 
     private final TaskService taskService;
 
