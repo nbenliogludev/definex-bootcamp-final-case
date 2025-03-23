@@ -16,7 +16,7 @@ import reactor.core.publisher.Mono;
 import java.util.List;
 
 /**
- * @author nbenliogludev
+ * nbenliogludev
  */
 @Component
 public class AuthenticationFilter implements GlobalFilter, Ordered {
@@ -29,6 +29,12 @@ public class AuthenticationFilter implements GlobalFilter, Ordered {
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
+        String path = exchange.getRequest().getURI().getPath();
+
+        // Bypass JWT validation for public endpoints
+        if (isPublicPath(path)) {
+            return chain.filter(exchange);
+        }
 
         HttpHeaders headers = exchange.getRequest().getHeaders();
         String authHeader = headers.getFirst(HttpHeaders.AUTHORIZATION);
@@ -44,10 +50,9 @@ public class AuthenticationFilter implements GlobalFilter, Ordered {
             return exchange.getResponse().setComplete();
         }
 
-        String path = exchange.getRequest().getURI().getPath();
         HttpMethod method = exchange.getRequest().getMethod();
-
         String requiredPermission = RoutePermissionMapper.getRequiredPermission(method, path);
+
         if (requiredPermission != null) {
             List<String> userPermissions = jwtUtil.extractPermissions(claims);
             if (!userPermissions.contains(requiredPermission)) {
@@ -55,12 +60,17 @@ public class AuthenticationFilter implements GlobalFilter, Ordered {
                 return exchange.getResponse().setComplete();
             }
         }
+
         return chain.filter(exchange);
+    }
+
+    private boolean isPublicPath(String path) {
+        return path.startsWith("/api/auth/v1/register") ||
+                path.startsWith("/api/auth/v1/authenticate");
     }
 
     @Override
     public int getOrder() {
-        return -1;
+        return -1; // Ensures it runs before other filters
     }
 }
-

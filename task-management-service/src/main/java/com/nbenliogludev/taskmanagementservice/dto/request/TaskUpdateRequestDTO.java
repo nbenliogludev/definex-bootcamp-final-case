@@ -10,6 +10,7 @@ import java.util.UUID;
  * @author nbenliogludev
  */
 public record TaskUpdateRequestDTO(
+        UUID id,
         String title,
         String description,
         TaskState state,

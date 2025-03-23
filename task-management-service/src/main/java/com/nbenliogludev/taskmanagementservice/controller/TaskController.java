@@ -29,11 +29,9 @@ public class TaskController {
         return ResponseEntity.ok(RestResponse.of(taskService.createTask(taskDto)));
     }
 
-    @PutMapping("/v1/{id}")
-    public ResponseEntity<RestResponse<TaskCreateResponseDTO>> updateTask(
-            @PathVariable UUID id,
-            @RequestBody TaskUpdateRequestDTO taskDto) {
-        return ResponseEntity.ok(RestResponse.of(taskService.updateTask(id, taskDto)));
+    @PutMapping("/v1")
+    public ResponseEntity<RestResponse<TaskCreateResponseDTO>> updateTask(@RequestBody TaskUpdateRequestDTO taskDto) {
+        return ResponseEntity.ok(RestResponse.of(taskService.updateTask(taskDto.id(), taskDto)));
     }
 
     @GetMapping("/v1/project/{projectId}")

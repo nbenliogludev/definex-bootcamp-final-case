@@ -28,7 +28,7 @@ public class CommentController {
         return ResponseEntity.ok(RestResponse.of(commentService.createComment(commentDto)));
     }
 
-    @GetMapping("/v1")
+    @GetMapping("/v1/task/{taskId}")
     public ResponseEntity<RestResponse<List<CommentCreateResponseDTO>>> getCommentsByTaskId(@PathVariable UUID taskId) {
         return ResponseEntity.ok(RestResponse.of(commentService.getCommentsByTaskId(taskId)));
     }
