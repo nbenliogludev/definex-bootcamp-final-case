@@ -4,7 +4,6 @@ import com.nbenliogludev.taskmanagementservice.enums.ProjectStatus;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
-import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -15,6 +14,5 @@ public record ProjectUpdateRequestDTO(
         @NotBlank String title,
         String description,
         @NotNull ProjectStatus status,
-        @NotNull UUID departmentId,
-        Set<UUID> teamMembersIds
+        @NotNull UUID departmentId
 ) {}
