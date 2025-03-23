@@ -32,7 +32,7 @@ Projeyi çalıştırmak için Docker kullanabilirsiniz. [Docker](https://www.doc
 Kapatmak için terminalinizden projenin ana dizinine gidin ve `docker-compose down` komutunu çalıştırın.
 
 ## Postman ile deneyin
-API adreslerini Postman ile deneyebilirsiniz: [**Postman API** 🚀](https://documenter.getpostman.com/view/5602393/2sA3kVj1Xz)
+API adreslerini Postman ile deneyebilirsiniz: [**Postman API** 🚀](https://documenter.getpostman.com/view/5602393/2sAYkHoxrE)
 
 ## Mikroservisler
 
