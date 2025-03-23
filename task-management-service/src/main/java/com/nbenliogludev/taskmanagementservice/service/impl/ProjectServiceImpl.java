@@ -78,4 +78,21 @@ public class ProjectServiceImpl implements ProjectService {
                 .orElseThrow(() -> new RuntimeException("Project not found"));
         projectRepository.delete(project);
     }
+
+    @Override
+    public void addMember(UUID projectId, UUID userId) {
+        Project project = projectRepository.findById(projectId)
+                .orElseThrow(() -> new RuntimeException("Project not found"));
+        project.getTeamMembersIds().add(userId);
+        projectRepository.save(project);
+    }
+
+    @Override
+    public void removeMember(UUID projectId, UUID userId) {
+        Project project = projectRepository.findById(projectId)
+                .orElseThrow(() -> new RuntimeException("Project not found"));
+        project.getTeamMembersIds().remove(userId);
+        projectRepository.save(project);
+    }
+
 }
