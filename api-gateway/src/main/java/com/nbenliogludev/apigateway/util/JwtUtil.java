@@ -37,7 +37,6 @@ public class JwtUtil {
 
     @SuppressWarnings("unchecked")
     public List<String> extractPermissions(Claims claims) {
-        // We expect a "permissions" claim as a List<String>
         Object perms = claims.get("permissions");
         if (perms instanceof List) {
             return (List<String>) perms;

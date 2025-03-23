@@ -3,6 +3,7 @@ package com.nbenliogludev.taskmanagementservice.dto.request;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
+import java.util.List;
 import java.util.UUID;
 
 
@@ -23,6 +24,7 @@ public record TaskCreateRequestDTO (
         UUID assigneeId,
 
         @NotNull(message = "Project ID cannot be null.")
-        UUID projectId
-){
-}
+        UUID projectId,
+
+        List<UUID> attachments // ✅ Optional
+) {}
