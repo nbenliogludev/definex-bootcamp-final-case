@@ -16,6 +16,7 @@ public record TaskUpdateRequestDTO(
         TaskState state,
         TaskPriority priority,
         String reason,
+        UUID projectId,
         UUID assigneeId,
         List<UUID> attachments
 ) {}

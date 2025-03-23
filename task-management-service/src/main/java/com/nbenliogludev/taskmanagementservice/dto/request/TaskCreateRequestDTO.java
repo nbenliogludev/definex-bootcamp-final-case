@@ -26,5 +26,5 @@ public record TaskCreateRequestDTO (
         @NotNull(message = "Project ID cannot be null.")
         UUID projectId,
 
-        List<UUID> attachments // ✅ Optional
+        List<UUID> attachments
 ) {}
