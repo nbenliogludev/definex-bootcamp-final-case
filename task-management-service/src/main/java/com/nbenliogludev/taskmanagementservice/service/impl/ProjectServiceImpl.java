@@ -59,18 +59,11 @@ public class ProjectServiceImpl implements ProjectService {
                 .orElseThrow(() -> new RuntimeException("Department not found"));
 
         project.setDepartment(department);
-        project.setTeamMembersIds(request.teamMembersIds());
 
         Project updated = projectRepository.save(project);
-        return new ProjectCreateResponseDTO(
-                updated.getId(),
-                updated.getTitle(),
-                updated.getDescription(),
-                updated.getStatus(),
-                updated.getDepartment().getId(),
-                updated.getTeamMembersIds()
-        );
+        return projectMapper.mapToProjectResponse(updated);
     }
+
 
     @Override
     public void deleteProject(UUID id) {
