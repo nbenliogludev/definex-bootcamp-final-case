@@ -18,10 +18,10 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class LogProducer {
 
-    @Value("${kafka.topic.error-log}")
+    @Value("${spring.kafka.topic.error-log}")
     private String errorLogTopic;
 
-    @Value("${kafka.topic.info-log}")
+    @Value("${spring.kafka.topic.info-log}")
     private String infoLogTopic;
 
     private final KafkaTemplate<String, Object> kafkaTemplate;

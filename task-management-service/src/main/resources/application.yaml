@@ -1,4 +1,8 @@
 spring:
+  kafka:
+    topic:
+      error-log: error-logs
+      info-log: info-logs
   application:
     name: task-management-service
   datasource:
@@ -25,3 +29,9 @@ spring:
 
 server:
   port: 8081
+
+swagger:
+  api:
+    title: Task Management API
+    description: API documentation for managing tasks, projects, departments, and comments.
+    version: 1.0.0

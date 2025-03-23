@@ -14,7 +14,7 @@ import java.util.UUID;
 /**
  * @author nbenliogludev
  */
-@FeignClient(name = "file-storage-service", url = "${file-storage-service.url}")
+@FeignClient(name = "file-storage-service")
 public interface FileStorageClient {
 
     @GetMapping("/api/files/validate/{id}")
