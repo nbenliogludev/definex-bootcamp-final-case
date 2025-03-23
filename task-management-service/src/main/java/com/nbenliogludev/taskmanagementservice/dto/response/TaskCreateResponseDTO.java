@@ -3,6 +3,7 @@ package com.nbenliogludev.taskmanagementservice.dto.response;
 import com.nbenliogludev.taskmanagementservice.enums.TaskPriority;
 import com.nbenliogludev.taskmanagementservice.enums.TaskState;
 
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -17,6 +18,7 @@ public record TaskCreateResponseDTO (
     TaskPriority priority,
     String assigneeId,
     UUID projectId,
-    String reason
+    String reason,
+    List<UUID> attachments
 ) {
 }
