@@ -88,7 +88,7 @@ services:
     networks:
       - postgres-network
 
-  postgres-auth-service:
+  postgres-user-authentication-service:
     image: postgres:15
     container_name: auth-service-db
     restart: always
@@ -117,6 +117,53 @@ services:
       - postgres_task_management_service_data:/var/lib/postgresql/data
     networks:
       - postgres-network
+
+  api-gateway:
+    build:
+      context: ./api-gateway
+      dockerfile: Dockerfile
+    container_name: api-gateway
+    depends_on:
+      - eureka-server
+    restart: always
+    network_mode: "host"
+
+  log-aggregation-service:
+    build:
+      context: ./log-aggregation-service
+      dockerfile: Dockerfile
+    container_name: log-aggregation-service
+    restart: always
+    depends_on:
+      - kafka
+      - mongodb
+      - api-gateway
+      - eureka-server
+    network_mode: "host"
+
+  file-storage-service:
+    build:
+      context: ./file-storage-service
+      dockerfile: Dockerfile
+    container_name: file-storage-service
+    restart: always
+    depends_on:
+      - postgres-file-storage-service
+      - api-gateway
+      - eureka-server
+    network_mode: "host"
+
+  user-authentication-service:
+    build:
+      context: ./user-authentication-service
+      dockerfile: Dockerfile
+    container_name: user-authentication-service
+    restart: always
+    depends_on:
+      - postgres-user-authentication-service
+      - api-gateway
+      - eureka-server
+    network_mode: "host"
 
 volumes:
   postgres_file_storage_service_data:
