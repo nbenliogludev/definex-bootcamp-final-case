@@ -10,10 +10,10 @@ COPY src ./src
 
 RUN mvn clean package -DskipTests
 
-RUN cp ./target/api-gateway-0.0.1-SNAPSHOT.jar /app.jar
+RUN cp ./target/file-storage-service-0.0.1-SNAPSHOT.jar /app.jar
 
 RUN rm -rf /app
 
 CMD ["java", "-jar", "/app.jar"]
 
-EXPOSE 8080:8080
+EXPOSE 8082:8082
