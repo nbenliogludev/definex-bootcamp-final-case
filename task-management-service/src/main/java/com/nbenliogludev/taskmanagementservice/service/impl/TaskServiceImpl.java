@@ -1,5 +1,6 @@
 package com.nbenliogludev.taskmanagementservice.service.impl;
 
+import com.nbenliogludev.taskmanagementservice.client.fileStorage.service.FileStorageService;
 import com.nbenliogludev.taskmanagementservice.dto.request.TaskCreateRequestDTO;
 import com.nbenliogludev.taskmanagementservice.dto.request.TaskUpdateRequestDTO;
 import com.nbenliogludev.taskmanagementservice.dto.response.TaskCreateResponseDTO;
@@ -25,6 +26,7 @@ public class TaskServiceImpl implements TaskService {
     private final TaskRepository taskRepository;
     private final ProjectRepository projectRepository;
     private final TaskMapper taskMapper;
+    private final FileStorageService fileStorageService;
 
     @Override
     public TaskCreateResponseDTO createTask(TaskCreateRequestDTO request) {
@@ -34,8 +36,9 @@ public class TaskServiceImpl implements TaskService {
                 .orElseThrow(() -> new RuntimeException("Project not found"));
 
         task.setProject(project);
-        Task saved = taskRepository.save(task);
+        validateAndSetAttachments(request.attachments(), task);
 
+        Task saved = taskRepository.save(task);
         return taskMapper.mapToTaskResponse(saved);
     }
 
@@ -45,9 +48,17 @@ public class TaskServiceImpl implements TaskService {
                 .orElseThrow(() -> new RuntimeException("Task not found"));
 
         taskMapper.updateTaskFromDto(request, task);
-        Task updated = taskRepository.save(task);
+        validateAndSetAttachments(request.attachments(), task);
 
+        Task updated = taskRepository.save(task);
         return taskMapper.mapToTaskResponse(updated);
+    }
+
+    private void validateAndSetAttachments(List<UUID> attachments, Task task) {
+        if (attachments != null && !attachments.isEmpty()) {
+            List<UUID> validIds = fileStorageService.getValidFileIds(attachments);
+            task.setAttachments(validIds);
+        }
     }
 
     @Override
