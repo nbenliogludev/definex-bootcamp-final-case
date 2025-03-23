@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.UUID;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -19,8 +20,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 /**
  * @author nbenliogludev
  */
-
-
 @Data
 @Builder
 @NoArgsConstructor
@@ -30,8 +29,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 public class User implements UserDetails {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID id;
 
     @NotBlank(message = "Name is required")
     @Column(name = "name", length = 80, nullable = false)

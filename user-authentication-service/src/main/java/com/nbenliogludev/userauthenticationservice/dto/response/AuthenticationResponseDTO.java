@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.UUID;
+
 @Data
 @Builder
 @AllArgsConstructor
@@ -17,5 +19,5 @@ public class AuthenticationResponseDTO {
     @JsonProperty("refresh_token")
     private String refreshToken;
     @JsonProperty("id")
-    private Long id;
+    private UUID id;
 }
