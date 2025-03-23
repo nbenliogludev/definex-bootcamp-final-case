@@ -8,15 +8,15 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="task-management-service" />
-        <module name="user-authentication-service" />
-        <module name="log-aggregation-service (1) (com.selimsahin)" />
         <module name="api-gateway" />
+        <module name="log-aggregation-service" />
         <module name="file-storage-service" />
+        <module name="user-authentication-service" />
         <module name="eureka-server" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="log-aggregation-service" target="21" />
+      <module name="log-aggregation-service (1) (com.selimsahin)" target="21" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">

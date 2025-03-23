@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/definex-bootcamp-final-case.iml" filepath="$PROJECT_DIR$/.idea/definex-bootcamp-final-case.iml" />
+      <module fileurl="file://$PROJECT_DIR$/log-aggregation-service/src/main/java/com/nbenliogludev/logaggregationservice/log-aggregation-service (1) (com.selimsahin).iml" filepath="$PROJECT_DIR$/log-aggregation-service/src/main/java/com/nbenliogludev/logaggregationservice/log-aggregation-service (1) (com.selimsahin).iml" />
     </modules>
   </component>
 </project>
