@@ -33,7 +33,7 @@ Aşağıda projeye ait mikroservislerin listesi bulunmaktadır.<br>
 
 ## Proje Şeması
 
-![Proje Diyagramı](images/fmss-project-diagram.png)
+![Proje Diyagramı](images/definex-project-diagram.png)
 
 ## AuthenticationService
 
