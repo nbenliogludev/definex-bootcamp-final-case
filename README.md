@@ -11,11 +11,27 @@ Email: [nikbenlioglu@gmail.com](mailto:nikbenlioglu@gmail.com)
 ## Kısaca Bazı Özellikler
 
 - Her temel servisin kendi veritabanı bulunuyor.
-- RabbitMQ ile asenkron mesajlaşma sağlandı.
+- Kafka ile asenkron mesajlaşma sağlandı.
 - Loglar için MongoDB kullanılıyor.
 - Eureka service discovery yapısı hazırlandı.
-- Next.js ile oluşturulmuş basit bir önyüze sahip.
 - Postman üzerinden denenebilir.
+- docker-compose.yml dosyası hazırlandı.
+- Swagger API dokümantasyonu eklendi.
+
+Projeyi `Docker` kullanarak nasıl çalıştırabileceğinizi öğrenmek için [Docker](#docker) bölümünü inceleyiniz.
+
+# Docker
+
+Projeyi çalıştırmak için Docker kullanabilirsiniz. [Docker](https://www.docker.com/products/docker-desktop) sayfasından docker'ı indirebilirsiniz.
+
+## Projeyi ayağa kaldıralım
+
+1. Terminalinizi açın ve projenin ana dizinine gidin.
+2. `docker-compose up -d` komutunu çalıştırın.
+3. Tüm servislerin başlatılmasını bekleyin. (Epey sürebilir, sabırlı olun...)
+4. Tüm servislerin başlatıldığını gördüğünüzde, API kullanılabilir durumda demektir (umarım)
+
+Kapatmak için terminalinizden projenin ana dizinine gidin ve `docker-compose down` komutunu çalıştırın.
 
 ## Postman ile deneyin
 API adreslerini Postman ile deneyebilirsiniz: [**Postman API** 🚀](https://documenter.getpostman.com/view/5602393/2sA3kVj1Xz)
