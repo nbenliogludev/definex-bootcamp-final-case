@@ -16,4 +16,4 @@ RUN rm -rf /app
 
 CMD ["java", "-jar", "/app.jar"]
 
-EXPOSE 8083:8083
+EXPOSE 8084:8084
