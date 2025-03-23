@@ -29,8 +29,8 @@ public class CommentController {
     }
 
     @GetMapping("/v1")
-    public ResponseEntity<RestResponse<List<CommentCreateResponseDTO>>> getCommentsByTaskId() {
-        return ResponseEntity.ok(RestResponse.of(commentService.getCommentsByTaskId()));
+    public ResponseEntity<RestResponse<List<CommentCreateResponseDTO>>> getCommentsByTaskId(@PathVariable UUID taskId) {
+        return ResponseEntity.ok(RestResponse.of(commentService.getCommentsByTaskId(taskId)));
     }
 
     @DeleteMapping("/v1/{id}")
