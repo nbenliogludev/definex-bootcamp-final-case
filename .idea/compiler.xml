@@ -9,6 +9,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="api-gateway" />
         <module name="task-management-service" />
+        <module name="log-aggregation-service" />
         <module name="file-storage-service" />
         <module name="eureka-server" />
         <module name="user-authentication-service" />
@@ -20,6 +21,7 @@
       <module name="api-gateway" options="-parameters" />
       <module name="eureka-server" options="-parameters" />
       <module name="file-storage-service" options="-parameters" />
+      <module name="log-aggregation-service" options="-parameters" />
       <module name="task-management-service" options="-parameters" />
       <module name="user-authentication-service" options="-parameters" />
     </option>

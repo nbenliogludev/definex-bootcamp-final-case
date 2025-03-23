@@ -9,6 +9,7 @@
         <option value="$PROJECT_DIR$/user-authentication-service/pom.xml" />
         <option value="$PROJECT_DIR$/api-gateway/pom.xml" />
         <option value="$PROJECT_DIR$/task-management-service/pom.xml" />
+        <option value="$PROJECT_DIR$/log-aggregation-service/pom.xml" />
       </list>
     </option>
   </component>
