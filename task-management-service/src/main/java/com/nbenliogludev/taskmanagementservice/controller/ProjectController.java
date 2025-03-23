@@ -44,4 +44,17 @@ public class ProjectController {
         projectService.deleteProject(id);
         return ResponseEntity.ok(RestResponse.empty());
     }
+
+    @PatchMapping("/v1/{projectId}/members/add")
+    public ResponseEntity<Void> addMemberToProject(@PathVariable UUID projectId, @RequestParam UUID memberId) {
+        projectService.addMember(projectId, memberId);
+        return ResponseEntity.ok().build();
+    }
+
+    @PatchMapping("/v1/{projectId}/members/remove")
+    public ResponseEntity<Void> removeMemberFromProject(@PathVariable UUID projectId, @RequestParam UUID memberId) {
+        projectService.removeMember(projectId, memberId);
+        return ResponseEntity.ok().build();
+    }
+
 }
