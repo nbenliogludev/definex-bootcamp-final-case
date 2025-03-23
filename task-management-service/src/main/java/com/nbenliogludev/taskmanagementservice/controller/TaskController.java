@@ -17,7 +17,7 @@ import java.util.UUID;
  * @author nbenliogludev
  */
 @RestController
-@RequestMapping("/api/tasks")
+@RequestMapping("/api/task-management/tasks")
 @Validated
 @RequiredArgsConstructor
 public class TaskController {

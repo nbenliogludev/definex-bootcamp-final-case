@@ -14,6 +14,7 @@ public interface TaskMapper {
     @Mapping(target = "comments", ignore = true)
     Task mapToTask(TaskCreateRequestDTO request);
 
+    @Mapping(source = "id", target = "taskId")
     @Mapping(source = "project.id", target = "projectId")
     TaskCreateResponseDTO mapToTaskResponse(Task task);
 
